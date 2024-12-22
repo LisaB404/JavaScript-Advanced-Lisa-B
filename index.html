@@ -2,24 +2,25 @@
 <html lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="dist/styles.css">
+    <link href="dist/styles.css">
     <!--Favicon-->
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png">
     <title>Book Searcher</title>
 </head>
-<body>
-    <main class="flex h-screen w-screen items-center justify-center text-center bg-gray-900">
+<body class="flex flex-col min-h-screen">
+    <main class="flex flex-wrap h-screen w-screen items-center justify-center text-center p-14 bg-[#1a202c]">
         <div class="flex md:w-2/4 flex-col items-center space-y-6 mx-4">
             <h1 class="text-white text-4xl"><span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">Book Searcher</span></h1>
             <div class="flex w-full rounded bg-white">
-            <input type="search" name="search" id="search" placeholder="Cerca il tuo genere letterario..." class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none">
-            <button type="button" class="m-2 rounded bg-indigo-500 px-4 py-2 text-white hover:bg-pink-500">Cerca</button>
-            <div id="results" class="results"></div>
+            <input type="search" name="search" id="inputSearch" placeholder="Cerca il tuo genere letterario..." class="w-full border-none bg-transparent px-4 py-1 text-gray-900 outline-none focus:outline-none">
+            <button id="srcBtn" type="button" class="m-2 rounded bg-indigo-500 px-4 py-2 text-white hover:bg-pink-500">Cerca</button>
             </div>
+        <h2 id="loading">Loading...</h2>
+        </div>
+        <div id="results" class="flex flex-col md:w-3/4 mx-2">
         </div>
     </main>
-    <footer class="w-screen text-center bg-gray-900 text-white py-2">All rights reserved &copy; 2024, Lisa Bortoli</footer>
 
 <script src="bundle.js"></script>
 </body>
