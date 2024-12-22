@@ -40,4 +40,29 @@ table, tr {
 img {
     max-height: 6em;
     width: auto;
+    cursor: pointer;
+}
+
+.bookDetails {
+    position: fixed;
+    top: 1em;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70vw;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgb(236, 72, 153, 1);
+    color: white;
+    border-radius: 0.25rem;
+    padding: 1em;
+}
+
+.bookDetailsClose {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3em;
+    cursor: pointer;
 }

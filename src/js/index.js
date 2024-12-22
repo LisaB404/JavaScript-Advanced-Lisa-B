@@ -7,7 +7,7 @@ const inputSearch = document.getElementById("inputSearch");
 const srcButton = document.getElementById("srcBtn");
 const divResults = document.getElementById("results");
 const loading = document.getElementById("loading");
-//const resultsList = document.getElementById("list");
+const body = document.querySelector("body");
 
 // Funzione per mostrare e nascondere loading
 function showLoad() {
@@ -89,6 +89,8 @@ async function getBooks() {
             const tdData = resultsItem.appendChild(document.createElement("td"));
             tdData.textContent = `${title} - ${authors}`;
             
+            tdCover.addEventListener("click", () => showBookDetails(book.key));
+            
             resultsTable.appendChild(resultsItem);
             });
 
@@ -99,51 +101,45 @@ async function getBooks() {
     }
 }
 
-// Event listener sul pulsante di ricerca
-srcButton.addEventListener("click", getBooks);
-
-});
-
 // Funzione per mostrare i dettagli di un libro
-/*async function showBookDetails(bookKey) {
+async function showBookDetails(bookKey) {
     const apiUrl = `https://openlibrary.org${bookKey}.json`;
-    showLoader();
+    showLoad();
 
     try {
         const response = await fetch(apiUrl);
         const data = await response.json();
-        
-        hideLoader();
+
+        hideLoad();
+
+        const description = data.description
+            ? (typeof data.description === 'string' ? data.description : data.description.value)
+            : "Descrizione non disponibile.";
 
         // Visualizza i dettagli del libro nel div #bookDetails
-        bookDetailsDiv.style.display = "block";
-        
-        if (data.description) {
-            const description = typeof data.description === 'string' ? data.description : data.description.value;
-            bookDescriptionParagraph.textContent = description;
-        } else {
-            bookDescriptionParagraph.textContent = "Descrizione non disponibile.";
-        }
+        const details = document.createElement("div");
+        const closeDetails = document.createElement("button");
 
+        closeDetails.classList.add("bookDetailsClose");
+        details.classList.add("bookDetails");
+        closeDetails.innerHTML = `&times;`;
+        details.innerHTML = `<p>Descrizione: <br>${description}</p>`;
+
+        details.appendChild(closeDetails);
+
+        closeDetails.addEventListener("click", () => {
+            details.remove();
+        });
+
+        // Aggiungi i dettagli al div
+        body.appendChild(details);
     } catch (error) {
         console.error("Errore nel recupero della descrizione del libro", error);
-    } finally {
-        hideLoader();
     }
+
 }
-}*/
 
+// Event listener sul pulsante di ricerca
+srcButton.addEventListener("click", getBooks);
 
-/*
-VERSIONE FUNZIONANTE LISTA RISULTATI
-       // Aggiungere titoli e autori ai risultati
-        data.docs.forEach(book => {
-            const title = book.title || "Titolo non disponibile";
-            const authors = book.author_name ? book.author_name.join(", ") : "Autore non disponibile";
-
-            const resultsItem = document.createElement("li");
-            resultsItem.classList.add("listItem");
-            resultsItem.textContent = `${title} - ${authors}`;
-            resultsList.appendChild(resultsItem);
-            });
-*/
+});
