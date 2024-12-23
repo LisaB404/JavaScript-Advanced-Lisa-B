@@ -25,6 +25,7 @@
     "webpack-dev-server": "^5.2.0"
   },
   "dependencies": {
+    "lodash.assign": "^4.2.0",
     "lodash.get": "^4.4.2",
     "lodash.samplesize": "^4.2.0"
   }

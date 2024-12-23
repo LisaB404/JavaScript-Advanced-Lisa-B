@@ -14,9 +14,14 @@ body {
     min-height: 100vh;
 }
 
-main {
-    margin-top: 1em;
-    margin-bottom: 1em;
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;  
+    height: 2em;
+    color: white;
+    text-align: center;
 }
 
 h2, p, ul {
@@ -35,6 +40,10 @@ h2, p, ul {
 table, tr {
     color: white;
     background-color: rgb(99, 102, 241, 0.3);
+}
+
+table {
+    margin-bottom: 2em;
 }
 
 img {

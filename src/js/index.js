@@ -1,6 +1,7 @@
 import "../css/styles.css";
 import get from 'lodash.get';
 import sampleSize from 'lodash.samplesize';
+import assign from 'lodash.assign';
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -74,8 +75,8 @@ async function getBooks() {
             resultsTable.innerHTML = "";
         }
         
-        // Limitare il numero di risultati a 15 random
-        const limitedResults = sampleSize(data.docs, 15);
+        // Limitare il numero di risultati a 10 random
+        const limitedResults = sampleSize(data.docs, 10);
 
         // Aggiungere informazioni sui libri ai risultati
         limitedResults.forEach(book => {
@@ -95,7 +96,6 @@ async function getBooks() {
             
             resultsTable.appendChild(resultsItem);
             });
-
     } catch (error) {
         divResults.innerHTML = `<h2>Errore durante il recupero dei dati: ${error.message}</h2>`;
     } finally {
@@ -114,9 +114,7 @@ async function showBookDetails(bookKey) {
 
         hideLoad();
 
-        const description = data.description
-            ? (typeof data.description === 'string' ? data.description : data.description.value)
-            : "Descrizione non disponibile.";
+        const description = get(data, 'description.value', 'Descrizione non disponibile');
 
         // Rimuovi eventuale descrizione già aperta
         const existingDetails = document.querySelector(".bookDetails");
@@ -124,23 +122,21 @@ async function showBookDetails(bookKey) {
             existingDetails.remove();
         }
 
-        // Visualizza i dettagli del libro nel div #bookDetails
+        // Visualizza i dettagli del libro nel div #bookDetails - con lodash.assign
         const details = document.createElement("div");
-        const closeDetails = document.createElement("button");
+        assign(details, {
+            className: 'bookDetails',
+            innerHTML: `
+              <p class="bookDetailsText">Descrizione: <br>${description}</p>
+              <button class="bookDetailsClose">&times;</button>
+            `,
+          });
+          body.appendChild(details);
 
-        closeDetails.classList.add("bookDetailsClose");
-        details.classList.add("bookDetails");
-        closeDetails.innerHTML = `&times;`;
-        details.innerHTML = `<p>Descrizione: <br>${description}</p>`;
-
-        details.appendChild(closeDetails);
-
+        const closeDetails = document.querySelector(".bookDetailsClose");
         closeDetails.addEventListener("click", () => {
             details.remove();
         });
-
-        // Aggiungi i dettagli al div
-        body.appendChild(details);
     } catch (error) {
         console.error("Errore nel recupero della descrizione del libro", error);
     }
