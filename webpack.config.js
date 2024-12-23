@@ -1,6 +1,5 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-//const loader = require('sass-loader');
 
 module.exports = {
     entry: {
@@ -15,20 +14,6 @@ module.exports = {
             test: /\.css$/i,
             use: ['style-loader', 'css-loader', 'postcss-loader']
         },
-   /*   {
-            test: /\.js$/i,
-            exclude: /node_modules/,
-            use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['@babel/preset-env']  
-                }
-            }
-        },
-        {
-            test: /\.(jpe?g|png|webp)$/i,
-            type: 'asset/resource'
-        }*/
     ]}, 
     plugins: [
         new HtmlWebpackPlugin({

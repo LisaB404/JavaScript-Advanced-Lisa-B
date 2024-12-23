@@ -44,25 +44,33 @@ img {
 }
 
 .bookDetails {
-    position: fixed;
-    top: 1em;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 70vw;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background-color: rgb(236, 72, 153, 1);
-    color: white;
     border-radius: 0.25rem;
-    padding: 1em;
+    padding: 0.5em;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    max-width: 70vw;
+    max-height: 60vh;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    p {
+        margin: 0.5em;
+        padding: 0.5em;
+    }
 }
 
 .bookDetailsClose {
     background: none;
     border: none;
     color: white;
-    font-size: 3em;
     cursor: pointer;
+    font-size: 2em;
+    padding: 5px;
+    position: absolute;
+    top: -10px;
+    right: 10px;
 }

@@ -1,4 +1,6 @@
 import "../css/styles.css";
+import get from 'lodash.get';
+import sampleSize from 'lodash.samplesize';
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -73,15 +75,15 @@ async function getBooks() {
         }
         
         // Limitare il numero di risultati a 15 random
-        const limitedResults = data.docs
-        .sort(() => Math.random() - 0.5)
-        .slice(0, 15);
+        const limitedResults = sampleSize(data.docs, 15);
 
         // Aggiungere informazioni sui libri ai risultati
         limitedResults.forEach(book => {
-            const title = book.title || "Titolo non disponibile";
-            const authors = book.author_name ? book.author_name.join(", ") : "Autore non disponibile";
-            const cover = book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg` : "https://via.placeholder.com/150";
+            const title = get(book, 'title', 'Titolo non disponibile');
+            const authors = get(book, 'author_name', []).join(', ');
+            const cover = get(book, 'cover_i')
+              ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
+              : 'https://via.placeholder.com/150';
 
             const resultsItem = document.createElement("tr");
             const tdCover = resultsItem.appendChild(document.createElement("td"));
@@ -115,6 +117,12 @@ async function showBookDetails(bookKey) {
         const description = data.description
             ? (typeof data.description === 'string' ? data.description : data.description.value)
             : "Descrizione non disponibile.";
+
+        // Rimuovi eventuale descrizione già aperta
+        const existingDetails = document.querySelector(".bookDetails");
+        if (existingDetails) {
+            existingDetails.remove();
+        }
 
         // Visualizza i dettagli del libro nel div #bookDetails
         const details = document.createElement("div");
