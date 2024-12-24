@@ -1,7 +1,7 @@
 # Book Searcher Website
 
 ## Preview 📸
-![Screenshot 2024-12-23 202157](https://github.com/user-attachments/assets/19d3be7c-468f-48b0-a4e4-d66238d438be)
+![Screenshot 2024-12-24 135322](https://github.com/user-attachments/assets/af4bdf0e-5aed-4f00-aa55-2d94fa00e96c)
 
 ## Try it here 👇🏼
 
