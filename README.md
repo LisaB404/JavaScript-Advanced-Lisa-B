@@ -21,4 +21,5 @@ The Book Searcher Website is a web application that allows users to search for b
 - JavaScript
 - Webpack
 - Lodash
+- Axios
 - Open Library API (for book data)
