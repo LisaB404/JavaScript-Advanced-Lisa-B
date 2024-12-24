@@ -25,7 +25,7 @@ function hideLoad() {
 function validateInput() {
     const input = inputSearch.value.trim();
     if (input === "") {
-        divResults.innerHTML = "<h2>Per favore, inserisci una categoria valida!</h2>";
+        divResults.innerHTML = "<h2>Please, enter a valid category!</h2>";
         return false;
     }
     return true;
@@ -46,13 +46,13 @@ async function getBooks() {
         
         // Controlla la risposta HTTP
         if (!response.ok) {
-            throw new Error(`Errore ${response.status}: ${response.statusText}`);
+            throw new Error(`Error ${response.status}: ${response.statusText}`);
         }
 
         const data = await response.json();
 
         if (data.docs.length === 0) {
-            divResults.innerHTML = "<h2>Nessun libro trovato.</h2>";
+            divResults.innerHTML = "<h2>No books found.</h2>";
             return;
         }
 
@@ -80,7 +80,7 @@ async function getBooks() {
 
         // Aggiungere informazioni sui libri ai risultati
         limitedResults.forEach(book => {
-            const title = get(book, 'title', 'Titolo non disponibile');
+            const title = get(book, 'title', 'Book not available.');
             const authors = get(book, 'author_name', []).join(', ');
             const cover = get(book, 'cover_i')
               ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
@@ -97,7 +97,7 @@ async function getBooks() {
             resultsTable.appendChild(resultsItem);
             });
     } catch (error) {
-        divResults.innerHTML = `<h2>Errore durante il recupero dei dati: ${error.message}</h2>`;
+        divResults.innerHTML = `<h2>Error while fetching data: ${error.message}</h2>`;
     } finally {
         hideLoad();
     }
@@ -114,7 +114,7 @@ async function showBookDetails(bookKey) {
 
         hideLoad();
 
-        const description = get(data, 'description.value', 'Descrizione non disponibile');
+        const description = get(data, 'description.value', 'The description is not available.');
 
         // Rimuovi eventuale descrizione già aperta
         const existingDetails = document.querySelector(".bookDetails");
@@ -127,7 +127,7 @@ async function showBookDetails(bookKey) {
         assign(details, {
             className: 'bookDetails',
             innerHTML: `
-              <p class="description" id="description">Descrizione: <br>${description}</p>
+              <p class="description" id="description">Description: <br>${description}</p>
               <button class="bookDetailsClose">&times;</button>
             `,
           });
@@ -138,7 +138,7 @@ async function showBookDetails(bookKey) {
             details.remove();
         });
     } catch (error) {
-        console.error("Errore nel recupero della descrizione del libro", error);
+        console.error("Error while fetching book details:", error);
     }
 
 }
