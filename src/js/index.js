@@ -2,6 +2,7 @@ import "../css/styles.css";
 import get from 'lodash.get';
 import sampleSize from 'lodash.samplesize';
 import assign from 'lodash.assign';
+import axios from 'axios';
 
 document.addEventListener("DOMContentLoaded", function() {
 
@@ -37,19 +38,13 @@ async function getBooks() {
 
     if (!validateInput()) return;
 
-    const apiUrl = `http://openlibrary.org/search.json?q=${input}`;
+    const apiUrl = `https://openlibrary.org/search.json?q=${input}`;
     divResults.innerHTML = ""; //svuota risultati precedenti
     showLoad();
 
     try {
-        const response = await fetch(apiUrl); //effettua chiamata API
-        
-        // Controlla la risposta HTTP
-        if (!response.ok) {
-            throw new Error(`Error ${response.status}: ${response.statusText}`);
-        }
-
-        const data = await response.json();
+        const response = await axios.get(apiUrl);
+        const data = response.data;
 
         if (data.docs.length === 0) {
             divResults.innerHTML = "<h2>No books found.</h2>";
@@ -109,8 +104,8 @@ async function showBookDetails(bookKey) {
     showLoad();
 
     try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
+        const response = await axios.get(apiUrl);
+        const data = response.data;
 
         hideLoad();
 
