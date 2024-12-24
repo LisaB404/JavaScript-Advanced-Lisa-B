@@ -84,7 +84,7 @@ async function getBooks() {
             const authors = get(book, 'author_name', []).join(', ');
             const cover = get(book, 'cover_i')
               ? `https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`
-              : 'https://via.placeholder.com/150';
+              : 'img/default-cover.png';
 
             const resultsItem = document.createElement("tr");
             const tdCover = resultsItem.appendChild(document.createElement("td"));
@@ -127,12 +127,12 @@ async function showBookDetails(bookKey) {
         assign(details, {
             className: 'bookDetails',
             innerHTML: `
-              <p class="bookDetailsText">Descrizione: <br>${description}</p>
+              <p class="description" id="description">Descrizione: <br>${description}</p>
               <button class="bookDetailsClose">&times;</button>
             `,
           });
           body.appendChild(details);
-
+          
         const closeDetails = document.querySelector(".bookDetailsClose");
         closeDetails.addEventListener("click", () => {
             details.remove();
