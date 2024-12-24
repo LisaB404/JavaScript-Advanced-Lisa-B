@@ -1,5 +1,4 @@
 import axios from 'axios';
-import get from 'lodash.get';
 
 export async function fetchBooks(query) {
     const apiUrl = `https://openlibrary.org/search.json?q=${query}`;

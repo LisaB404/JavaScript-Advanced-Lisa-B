@@ -15,3 +15,14 @@ export function validateInput(inputElement, resultsContainer) {
     }
     return true;
 }
+
+export function createResultsTitle(parent) {
+    let resultsTitle = document.querySelector(".resultsTitle");
+    if (!resultsTitle) {
+        resultsTitle = document.createElement("h2");
+        resultsTitle.classList.add("resultsTitle");
+        resultsTitle.textContent = "Results:";
+        parent.appendChild(resultsTitle);
+    }
+    return resultsTitle;
+}

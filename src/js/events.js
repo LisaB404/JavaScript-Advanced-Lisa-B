@@ -1,5 +1,5 @@
 import { fetchBooks, fetchBookDetails } from './api.js';
-import { showLoad, hideLoad, validateInput } from './domUtils.js';
+import { showLoad, hideLoad, validateInput, createResultsTitle } from './domUtils.js';
 import get from 'lodash.get';
 import sampleSize from 'lodash.samplesize';
 import assign from 'lodash.assign';
@@ -20,6 +20,8 @@ export function setupEventListeners(inputSearch, srcButton, divResults, loading,
                 return;
             }
 
+            createResultsTitle(divResults);
+            
             // Crea una tabella per i risultati
             let resultsTable = document.querySelector(".resultsTable");
             if (!resultsTable) {
@@ -29,7 +31,7 @@ export function setupEventListeners(inputSearch, srcButton, divResults, loading,
             } else {
                 resultsTable.innerHTML = "";
             }
-
+            
             // Mostra solo i primi 10 risultati
             const limitedResults = sampleSize(books, 10);
             limitedResults.forEach(book => {

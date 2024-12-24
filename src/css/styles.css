@@ -34,7 +34,6 @@ table {
     overflow: hidden;
     color: white;
     background-color: rgb(99, 102, 241, 0.3);
-    margin-top: 2em;
 }
 
 tr:nth-child(even) {
