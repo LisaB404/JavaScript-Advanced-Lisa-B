@@ -3,7 +3,8 @@
 ## Preview 📸
 ![Screenshot 2024-12-24 135322](https://github.com/user-attachments/assets/af4bdf0e-5aed-4f00-aa55-2d94fa00e96c)
 
-## Try it here 👇🏼
+## Try it here 🔗
+https://booksearcher-lisab.netlify.app/
 
 ## Description
 The Book Searcher Website is a web application that allows users to search for books by category or title. It retrieves data from the Open Library API and displays a list of books along with their authors and cover images. Users can click on a book cover to view more details, including a description of the book.
