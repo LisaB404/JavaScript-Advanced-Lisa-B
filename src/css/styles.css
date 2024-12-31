@@ -42,7 +42,8 @@ tr:nth-child(even) {
 
 img {
     width: 100%;
-    max-width: 250px;
+    max-width: 15em;
+    min-width: 4em;
     height: auto;
     object-fit: cover;
     border-radius: 5px;
