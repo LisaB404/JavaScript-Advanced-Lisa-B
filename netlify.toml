@@ -1,0 +1,4 @@
+[[headers]]
+for = "/*"  # Applica a tutte le risorse
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
